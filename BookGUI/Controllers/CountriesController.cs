@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BookGUI.ViewModels;
 
 namespace BookGUI.Controllers
 {
@@ -40,7 +41,21 @@ namespace BookGUI.Controllers
                     $"from the database or no country with that id exists";
                 country = new CountryDto();
             }
-            return View(country);
+
+            var authors = _countryRepository.GetAuthorsFromACountry(countryId);
+            if (authors.Count() <= 0)
+            {
+                ViewBag.AuthorMessage = $"There was a problem retrieving authors from a country with Id={countryId} " +
+                    $"from the database or any author in this country exists";
+            }
+
+            var countryAuthors = new CountryAuthorsViewModel
+            {
+                Authors =  authors,
+                Country = country
+            };
+
+            return View(countryAuthors);
         }
     }
 }
