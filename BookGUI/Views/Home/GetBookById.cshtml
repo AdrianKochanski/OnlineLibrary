@@ -62,13 +62,20 @@
     </table>
     <br />
     <div class="form-group text-center">
+        <a class="btn btn-sm btn-info"
+           asp-controller="Reviews"
+           asp-action="CreateReview"
+           asp-route-bookId="@Model.Book.Id"
+           asp-route-bookTitle="@Model.Book.Title">
+            Add Review
+        </a>
         <a class="btn btn-sm btn-primary"
            asp-controller="Home"
            asp-action="UpdateBook"
            asp-route-bookId="@Model.Book.Id">
             Update Book
         </a>
-        <a class="btn btn-sm btn-primary"
+        <a class="btn btn-sm btn-danger"
            asp-controller="Home"
            asp-action="DeleteBook"
            asp-route-bookId="@Model.Book.Id">
